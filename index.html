@@ -3,78 +3,398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日文N3學習平台</title>
+<title>17の日本語学習地獄</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+  background: linear-gradient(135deg, #1a0000 0%, #000000 100%);
+  color: #f4d03f;
+}
 .container { display: flex; max-width: 1200px; margin: 0 auto; padding: 1.5rem; gap: 1.5rem; }
 .sidebar { width: 180px; position: sticky; top: 1.5rem; height: fit-content; }
-.nav-menu { background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 1rem; }
-.nav-section-title { font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600; margin: 0.75rem 0.625rem 0.375rem; letter-spacing: 0.5px; }
+.nav-menu { 
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0505 100%); 
+  border-radius: 12px; 
+  padding: 1rem; 
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  margin-bottom: 1rem; 
+}
+.nav-section-title { 
+  font-size: 11px; 
+  color: #8b0000; 
+  text-transform: uppercase; 
+  font-weight: 600; 
+  margin: 0.75rem 0.625rem 0.375rem; 
+  letter-spacing: 0.5px; 
+}
 .nav-section-title:first-child { margin-top: 0; }
-.nav-item { padding: 0.625rem; margin-bottom: 0.25rem; cursor: pointer; border-radius: 8px; font-size: 13px; transition: all 0.15s; }
-.nav-item:hover { background: #f0f0f0; }
-.nav-item.active { background: #e6f1fb; color: #378add; font-weight: 500; }
-.stats { background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.nav-item { 
+  padding: 0.625rem; 
+  margin-bottom: 0.25rem; 
+  cursor: pointer; 
+  border-radius: 8px; 
+  font-size: 13px; 
+  transition: all 0.15s;
+  color: #f4d03f;
+  border: 1px solid transparent;
+}
+.nav-item:hover { 
+  background: rgba(139, 0, 0, 0.2);
+  border-color: rgba(139, 0, 0, 0.4);
+}
+.nav-item.active { 
+  background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
+  color: #ffd700; 
+  font-weight: 500;
+  border-color: #8b0000;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.4);
+}
+.stats { 
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0505 100%);
+  border-radius: 12px; 
+  padding: 1rem; 
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 0.75rem; 
+}
 .stat { text-align: center; }
-.stat-label { font-size: 11px; color: #666; margin-bottom: 0.25rem; }
-.stat-value { font-size: 18px; font-weight: 500; }
+.stat-label { font-size: 11px; color: #999; margin-bottom: 0.25rem; }
+.stat-value { font-size: 18px; font-weight: 500; color: #ff4444; }
 .main { flex: 1; }
-.section { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); scroll-margin-top: 20px; }
-.section-title { font-size: 18px; font-weight: 500; margin-bottom: 1rem; }
+.section { 
+  background: linear-gradient(135deg, #1a0505 0%, #0a0000 100%);
+  border-radius: 12px; 
+  padding: 1.5rem; 
+  margin-bottom: 1rem; 
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  scroll-margin-top: 20px; 
+}
+.section-title { font-size: 18px; font-weight: 500; margin-bottom: 1rem; color: #ff6666; }
 .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.btn { padding: 0.5rem 1rem; background: white; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
-.btn:hover { background: #f5f5f5; }
-.play-btn { padding: 0.375rem 0.75rem; background: white; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; gap: 0.375rem; }
-.play-btn:hover { background: #f5f5f5; }
-.grammar-item { background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
-.grammar-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; gap: 1rem; flex-wrap: wrap; }
-.grammar-title { font-size: 16px; font-weight: 500; }
-.meaning { color: #666; font-size: 14px; margin-bottom: 0.75rem; }
-.note { background: #e6f1fb; color: #378add; padding: 0.75rem; border-radius: 8px; font-size: 13px; margin-bottom: 0.75rem; line-height: 1.6; }
-.example { padding: 0.75rem; background: white; border-radius: 8px; margin-bottom: 0.5rem; }
-.example-ja { font-size: 15px; margin-bottom: 0.25rem; }
-.example-kana { font-size: 14px; color: #666; margin-bottom: 0.25rem; }
-.example-zh { font-size: 13px; color: #666; }
-.practice-box { background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
-.practice-input { width: 100%; min-height: 100px; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical; }
-.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; }
-.vocab-card { background: #f9f9f9; padding: 1rem; border-radius: 8px; }
-.vocab-word { font-size: 16px; font-weight: 500; margin-bottom: 0.25rem; }
-.vocab-kana { font-size: 13px; color: #666; margin-bottom: 0.25rem; cursor: pointer; transition: opacity 0.2s; }
-.vocab-kana:hover { color: #333; }
+.btn { 
+  padding: 0.5rem 1rem; 
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0000 100%);
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-size: 13px; 
+  transition: all 0.15s;
+  color: #f4d03f;
+}
+.btn:hover { 
+  background: linear-gradient(135deg, #3a0a0a 0%, #2a0000 100%);
+  border-color: #8b0000;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
+}
+.play-btn { 
+  padding: 0.375rem 0.75rem; 
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0000 100%);
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-size: 13px; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 0.375rem;
+  color: #f4d03f;
+  transition: all 0.15s;
+}
+.play-btn:hover { 
+  background: linear-gradient(135deg, #3a0a0a 0%, #2a0000 100%);
+  border-color: #8b0000;
+  transform: scale(1.05);
+}
+.grammar-item { 
+  background: linear-gradient(135deg, #0a0000 0%, #050000 100%);
+  padding: 1rem; 
+  border-radius: 8px; 
+  margin-bottom: 1rem;
+  border: 1px solid rgba(139, 0, 0, 0.2);
+}
+.grammar-title { font-size: 16px; font-weight: 500; color: #ff8888; margin-bottom: 0.5rem; }
+.meaning { color: #c9a962; font-size: 14px; margin-bottom: 0.5rem; }
+.note { 
+  background: rgba(139, 0, 0, 0.2);
+  color: #ff6666;
+  padding: 0.75rem; 
+  border-radius: 8px; 
+  font-size: 13px; 
+  margin-bottom: 0.75rem; 
+  line-height: 1.6;
+  border: 1px solid rgba(139, 0, 0, 0.3);
+}
+.example { 
+  padding: 0.75rem; 
+  background: rgba(10, 0, 0, 0.5);
+  border-radius: 8px; 
+  margin-bottom: 0.5rem;
+  border-left: 2px solid #8b0000;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.example-content { flex: 1; }
+.example-ja { font-size: 15px; margin-bottom: 0.25rem; color: #f4d03f; }
+.example-kana { font-size: 14px; color: #c9a962; margin-bottom: 0.25rem; }
+.example-zh { font-size: 13px; color: #999; }
+.random-practice { 
+  background: rgba(139, 0, 0, 0.15);
+  padding: 1.25rem; 
+  border-radius: 8px; 
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(139, 0, 0, 0.4);
+}
+.random-word-display {
+  font-size: 32px;
+  font-weight: 600;
+  color: #ff6666;
+  text-align: center;
+  margin: 1rem 0;
+  min-height: 50px;
+}
+.practice-input-large { 
+  width: 100%; 
+  padding: 0.875rem; 
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 8px; 
+  font-size: 18px; 
+  font-family: inherit; 
+  background: rgba(0, 0, 0, 0.5);
+  color: #f4d03f;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.practice-input-large:focus { 
+  outline: none;
+  border-color: #8b0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.2);
+}
+.practice-feedback {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  min-height: 30px;
+  margin-bottom: 1rem;
+}
+.practice-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+.vocab-card { 
+  background: linear-gradient(135deg, #0a0000 0%, #050000 100%);
+  padding: 1rem; 
+  border-radius: 8px;
+  border: 1px solid rgba(139, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.vocab-content { flex: 1; }
+.vocab-word { font-size: 16px; font-weight: 500; margin-bottom: 0.25rem; color: #ff8888; }
+.vocab-kana { font-size: 13px; color: #c9a962; margin-bottom: 0.25rem; cursor: pointer; transition: opacity 0.2s; }
+.vocab-kana:hover { color: #f4d03f; }
 .vocab-kana.hidden { opacity: 0; }
-.vocab-type { font-size: 11px; padding: 2px 6px; background: #e6f1fb; color: #378add; border-radius: 6px; display: inline-block; margin-bottom: 0.5rem; }
-.vocab-meaning { font-size: 14px; margin-bottom: 0.375rem; }
-.vocab-ex { font-size: 13px; margin-bottom: 0.125rem; }
-.vocab-ex-zh { font-size: 12px; color: #666; }
-.phrase-item { background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; }
-.phrase-ja { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
-.phrase-meaning { font-size: 14px; color: #666; margin-bottom: 0.5rem; }
-.phrase-ex { font-size: 13px; margin-bottom: 0.25rem; }
-.phrase-ex-zh { font-size: 12px; color: #666; }
-.task { background: #f9f9f9; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem; }
-.task-type { font-size: 12px; color: #378add; background: #e6f1fb; padding: 0.25rem 0.75rem; border-radius: 6px; display: inline-block; margin-bottom: 0.75rem; }
-.task-instruction { font-size: 14px; color: #666; margin-bottom: 1rem; }
+.vocab-type { 
+  font-size: 11px; 
+  padding: 2px 6px; 
+  background: rgba(139, 0, 0, 0.3);
+  color: #ff6666;
+  border-radius: 6px; 
+  display: inline-block; 
+  margin-bottom: 0.5rem; 
+}
+.vocab-meaning { font-size: 14px; margin-bottom: 0.375rem; color: #f4d03f; }
+.vocab-ex { font-size: 13px; margin-bottom: 0.125rem; color: #c9a962; }
+.vocab-ex-zh { font-size: 12px; color: #888; }
+.phrase-item { 
+  background: linear-gradient(135deg, #0a0000 0%, #050000 100%);
+  padding: 1rem; 
+  border-radius: 8px; 
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(139, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.phrase-content { flex: 1; }
+.phrase-ja { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; color: #ff8888; }
+.phrase-meaning { font-size: 14px; color: #c9a962; margin-bottom: 0.5rem; }
+.phrase-ex { font-size: 13px; margin-bottom: 0.25rem; color: #f4d03f; }
+.phrase-ex-zh { font-size: 12px; color: #888; }
+.task { 
+  background: rgba(10, 0, 0, 0.5);
+  padding: 1.25rem; 
+  border-radius: 8px; 
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(139, 0, 0, 0.3);
+}
+.task-type { 
+  font-size: 12px; 
+  color: #ff6666;
+  background: rgba(139, 0, 0, 0.3);
+  padding: 0.25rem 0.75rem; 
+  border-radius: 6px; 
+  display: inline-block; 
+  margin-bottom: 0.75rem; 
+}
+.task-instruction { font-size: 14px; color: #c9a962; margin-bottom: 1rem; }
 .audio-controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.question-box { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
-.question-text { font-size: 15px; font-weight: 500; margin-bottom: 0.75rem; }
+.question-box { 
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem; 
+  border-radius: 8px; 
+  margin-bottom: 1rem;
+  border: 1px solid rgba(139, 0, 0, 0.2);
+}
+.question-text { font-size: 15px; font-weight: 500; margin-bottom: 0.75rem; color: #f4d03f; }
 .options { display: flex; flex-direction: column; gap: 0.5rem; }
-.option { padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
-.option:hover { background: #f5f5f5; }
-.option.selected { border-color: #378add; background: #e6f1fb; }
-.option.correct { border-color: #639922; background: #eaf3de; }
-.option.wrong { border-color: #e24b4a; background: #fcebeb; }
-.fill-input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
-.fill-input.correct { border-color: #639922; background: #eaf3de; }
-.fill-input.wrong { border-color: #e24b4a; background: #fcebeb; }
-.answer-hint { font-size: 13px; color: #666; margin-top: 0.5rem; display: none; }
+.option { 
+  padding: 0.75rem; 
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: all 0.15s; 
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #f4d03f;
+}
+.option:hover { 
+  background: rgba(139, 0, 0, 0.2);
+  border-color: rgba(139, 0, 0, 0.5);
+}
+.option.selected { 
+  border-color: #8b0000;
+  background: rgba(139, 0, 0, 0.3);
+  color: #ffd700;
+}
+.option.correct { 
+  border-color: #2d5a2d;
+  background: rgba(45, 90, 45, 0.3);
+  color: #90ee90;
+}
+.option.wrong { 
+  border-color: #8b0000;
+  background: rgba(139, 0, 0, 0.4);
+  color: #ffaaaa;
+}
+.fill-input { 
+  width: 100%; 
+  padding: 0.75rem; 
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 8px; 
+  font-size: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f4d03f;
+}
+.fill-input:focus { 
+  outline: none;
+  border-color: #8b0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.2);
+}
+.fill-input.correct { 
+  border-color: #2d5a2d;
+  background: rgba(45, 90, 45, 0.2);
+  color: #90ee90;
+}
+.fill-input.wrong { 
+  border-color: #8b0000;
+  background: rgba(139, 0, 0, 0.3);
+  color: #ffaaaa;
+}
+.answer-hint { font-size: 13px; color: #c9a962; margin-top: 0.5rem; display: none; }
 .answer-hint.show { display: block; }
-.passage { background: #f9f9f9; padding: 1.25rem; border-radius: 8px; margin-bottom: 1rem; line-height: 1.8; font-size: 15px; }
-.submit-btn { width: 100%; padding: 0.875rem; background: white; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 500; }
-.submit-btn:hover { background: #f5f5f5; }
-.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.result { padding: 1rem; background: #eaf3de; color: #639922; border-radius: 8px; margin-top: 1rem; font-size: 14px; text-align: center; }
+.passage { 
+  background: rgba(10, 0, 0, 0.5);
+  padding: 1.25rem; 
+  border-radius: 8px; 
+  margin-bottom: 1rem; 
+  line-height: 1.8; 
+  font-size: 15px;
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  color: #f4d03f;
+}
+.submit-btn { 
+  width: 100%; 
+  padding: 0.875rem; 
+  background: linear-gradient(135deg, #8b0000 0%, #5a0000 100%);
+  border: 1px solid #8b0000;
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-size: 15px; 
+  font-weight: 500;
+  color: #ffd700;
+  transition: all 0.15s;
+}
+.submit-btn:hover { 
+  background: linear-gradient(135deg, #a00000 0%, #6a0000 100%);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+.submit-btn:disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed;
+  transform: none;
+}
+.result { 
+  padding: 1rem; 
+  background: rgba(45, 90, 45, 0.3);
+  color: #90ee90;
+  border-radius: 8px; 
+  margin-top: 1rem; 
+  font-size: 14px; 
+  text-align: center;
+  border: 1px solid rgba(45, 90, 45, 0.5);
+}
+.hell-warning {
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0505 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 12px;
+  color: #ff4444;
+  font-weight: 500;
+}
+.day-selector-box {
+  background: linear-gradient(135deg, #2a0a0a 0%, #1a0505 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+  margin-top: 1rem;
+}
+.day-selector-box select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f4d03f;
+  cursor: pointer;
+}
+.day-selector-box select:focus {
+  outline: none;
+  border-color: #8b0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.2);
+}
+.day-selector-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
 @media (max-width: 900px) {
   .container { flex-direction: column; }
   .sidebar { width: 100%; position: static; }
@@ -87,14 +407,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="sidebar">
     <div class="nav-menu">
       <div class="nav-section-title">學習</div>
-      <div class="nav-item active" data-section="grammar">📚 文法</div>
-      <div class="nav-item" data-section="vocab">📝 單字</div>
-      <div class="nav-item" data-section="phrases">💬 片語</div>
+      <div class="nav-item active" data-section="grammar">🔥 文法</div>
+      <div class="nav-item" data-section="vocab">💀 單字</div>
+      <div class="nav-item" data-section="phrases">🩸 片語</div>
       <div class="nav-section-title">測驗</div>
-      <div class="nav-item" data-section="grammar-test">✅ 文法</div>
-      <div class="nav-item" data-section="vocab-test">✅ 單字</div>
-      <div class="nav-item" data-section="listening">🎧 聽力</div>
-      <div class="nav-item" data-section="reading">📖 閱讀</div>
+      <div class="nav-item" data-section="grammar-test">⚔️ 文法</div>
+      <div class="nav-item" data-section="listening">👂 聽力</div>
+      <div class="nav-item" data-section="reading">📜 閱讀</div>
     </div>
     <div class="stats">
       <div class="stat">
@@ -103,7 +422,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       </div>
       <div class="stat">
         <div class="stat-label">進度</div>
-        <div class="stat-value" id="progress">3%</div>
+        <div class="stat-value" id="progress">10%</div>
       </div>
       <div class="stat">
         <div class="stat-label">文法</div>
@@ -114,12 +433,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <div class="stat-value" id="accuracy">—</div>
       </div>
     </div>
-    <div style="background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-top: 1rem;">
-      <div style="font-size: 12px; color: #999; margin-bottom: 0.5rem;">選擇天數</div>
-      <select id="daySelector" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+    <div class="day-selector-box">
+      <div class="day-selector-label">選擇天數</div>
+      <select id="daySelector">
         <option value="1">Day 1</option>
         <option value="2">Day 2</option>
+        <option value="3">Day 3</option>
+        <option value="4">Day 4</option>
+        <option value="5">Day 5</option>
+        <option value="6">Day 6</option>
+        <option value="7">Day 7</option>
+        <option value="8">Day 8</option>
+        <option value="9">Day 9</option>
+        <option value="10">Day 10</option>
       </select>
+    </div>
+    <div class="hell-warning">
+      ⚠️ 背不起來都下地獄
     </div>
   </div>
 
@@ -134,246 +464,580 @@ let allKanaHidden = false;
 let listeningAnswers = {};
 let readingAnswers = {};
 let grammarAnswers = {};
+let currentRandomWord = null;
+let currentRandomIndex = -1;
 
 const curriculum = {
   1: {
-    title: "Day 1 - N4基礎補強",
+    title: "Day 1 - N4基礎",
     grammar: [
-      {
-        pattern: "〜によって / 〜により",
-        meaning: "根據⋯⋯;因為⋯⋯;透過⋯⋯",
-        usage: "名詞 + によって/により",
-        note: "「によって」是普通體;「により」是書面語,較正式。意思相同。",
-        examples: [
-          { ja: "天気によって、予定が変わります。", kana: "天気(てんき)によって、予定(よてい)が変(か)わります。", zh: "根據天氣,計畫會改變。" },
-          { ja: "地震により、電車が止まった。", kana: "地震(じしん)により、電車(でんしゃ)が止(と)まった。", zh: "因為地震,電車停駛了。" }
-        ]
-      },
-      {
-        pattern: "〜について / 〜に関して",
-        meaning: "關於⋯⋯",
-        usage: "名詞 + について/に関して",
-        note: "「について」較口語;「に関して」較正式。可互換。",
-        examples: [
-          { ja: "日本の文化について話しましょう。", kana: "日本(にほん)の文化(ぶんか)について話(はな)しましょう。", zh: "來聊聊日本的文化吧。" },
-          { ja: "環境問題について調べています。", kana: "環境(かんきょう)問題(もんだい)について調(しら)べています。", zh: "正在調查環境問題。" }
-        ]
-      },
-      {
-        pattern: "〜てしまう",
-        meaning: "完全做完;遺憾地做了",
-        usage: "動詞て形 + しまう",
-        note: "口語常縮約成「ちゃう/じゃう」。",
-        examples: [
-          { ja: "宿題を忘れてしまいました。", kana: "宿題(しゅくだい)を忘(わす)れてしまいました。", zh: "把作業忘了(遺憾)。" },
-          { ja: "ご飯を全部食べてしまった。", kana: "ご飯(はん)を全部(ぜんぶ)食(た)べてしまった。", zh: "把飯全部吃完了。" }
-        ]
-      }
+      { pattern: "〜によって", meaning: "根據⋯;因為⋯", examples: [
+        { ja: "天気によって予定が変わる", kana: "天気(てんき)によって予定(よてい)が変(か)わる", zh: "根據天氣計畫改變" }
+      ]},
+      { pattern: "〜について", meaning: "關於⋯", examples: [
+        { ja: "環境問題について話す", kana: "環境(かんきょう)問題(もんだい)について話(はな)す", zh: "談論環境問題" }
+      ]},
+      { pattern: "〜てしまう", meaning: "完全⋯;遺憾地⋯", examples: [
+        { ja: "宿題を忘れてしまった", kana: "宿題(しゅくだい)を忘(わす)れてしまった", zh: "把作業忘了" }
+      ]}
     ],
     vocabulary: [
-      { word: "予定", kana: "よてい", type: "名詞", meaning: "計畫、預定", ex: "明日の予定は?", exZh: "明天的計畫是?" },
-      { word: "地震", kana: "じしん", type: "名詞", meaning: "地震", ex: "地震が起きた", exZh: "地震發生了" },
+      { word: "予定", kana: "よてい", type: "名詞", meaning: "計畫", ex: "予定が変わる", exZh: "計畫改變" },
+      { word: "地震", kana: "じしん", type: "名詞", meaning: "地震", ex: "地震が起きる", exZh: "地震發生" },
       { word: "情報", kana: "じょうほう", type: "名詞", meaning: "資訊", ex: "情報を集める", exZh: "收集資訊" },
-      { word: "文化", kana: "ぶんか", type: "名詞", meaning: "文化", ex: "日本の文化", exZh: "日本的文化" },
       { word: "問題", kana: "もんだい", type: "名詞", meaning: "問題", ex: "問題がある", exZh: "有問題" },
-      { word: "意見", kana: "いけん", type: "名詞", meaning: "意見", ex: "意見を言う", exZh: "說意見" },
       { word: "環境", kana: "かんきょう", type: "名詞", meaning: "環境", ex: "環境問題", exZh: "環境問題" },
+      { word: "原因", kana: "げんいん", type: "名詞", meaning: "原因", ex: "事故の原因", exZh: "事故原因" },
+      { word: "影響", kana: "えいきょう", type: "名詞", meaning: "影響", ex: "影響を受ける", exZh: "受影響" },
+      { word: "方法", kana: "ほうほう", type: "名詞", meaning: "方法", ex: "いい方法", exZh: "好方法" },
       { word: "調べる", kana: "しらべる", type: "動II", meaning: "調查", ex: "資料を調べる", exZh: "調查資料" },
-      { word: "集める", kana: "あつめる", type: "動II", meaning: "收集", ex: "お金を集める", exZh: "收集錢" },
-      { word: "止まる", kana: "とまる", type: "動I", meaning: "停止", ex: "電車が止まる", exZh: "電車停了" },
-      { word: "変わる", kana: "かわる", type: "動I", meaning: "改變", ex: "予定が変わる", exZh: "計畫改變了" },
-      { word: "起きる", kana: "おきる", type: "動II", meaning: "發生、起床", ex: "事故が起きる", exZh: "事故發生了" },
-      { word: "原因", kana: "げんいん", type: "名詞", meaning: "原因", ex: "事故の原因", exZh: "事故的原因" },
-      { word: "結果", kana: "けっか", type: "名詞", meaning: "結果", ex: "試験の結果", exZh: "考試的結果" },
-      { word: "影響", kana: "えいきょう", type: "名詞", meaning: "影響", ex: "影響を受ける", exZh: "受到影響" },
-      { word: "受ける", kana: "うける", type: "動II", meaning: "接受、受到", ex: "影響を受ける", exZh: "受到影響" },
-      { word: "与える", kana: "あたえる", type: "動II", meaning: "給予", ex: "影響を与える", exZh: "給予影響" },
-      { word: "説明", kana: "せつめい", type: "名詞", meaning: "說明", ex: "説明する", exZh: "說明" },
-      { word: "理由", kana: "りゆう", type: "名詞", meaning: "理由", ex: "理由を聞く", exZh: "問理由" },
-      { word: "方法", kana: "ほうほう", type: "名詞", meaning: "方法", ex: "いい方法", exZh: "好方法" }
+      { word: "変わる", kana: "かわる", type: "動I", meaning: "改變", ex: "予定が変わる", exZh: "計畫改變" }
     ],
     phrases: [
-      { ja: "〜を中心に", meaning: "以⋯⋯為中心", ex: "駅を中心に発展した", exZh: "以車站為中心發展了" },
-      { ja: "〜に基づいて", meaning: "根據⋯⋯", ex: "法律に基づいて判断する", exZh: "根據法律來判斷" },
-      { ja: "〜によれば", meaning: "根據⋯⋯(說)", ex: "天気予報によれば雨だ", exZh: "根據天氣預報會下雨" },
-      { ja: "〜に応じて", meaning: "根據⋯⋯;配合⋯⋯", ex: "年齢に応じて料金が違う", exZh: "根據年齡費用不同" },
-      { ja: "〜のおかげで", meaning: "多虧⋯⋯", ex: "あなたのおかげで成功した", exZh: "多虧了你才成功了" }
+      { ja: "〜を中心に", meaning: "以⋯為中心", ex: "駅を中心に発展した", exZh: "以車站為中心發展" },
+      { ja: "〜によれば", meaning: "根據⋯(說)", ex: "天気予報によれば雨だ", exZh: "根據天氣預報會下雨" },
+      { ja: "〜のおかげで", meaning: "多虧⋯", ex: "あなたのおかげで成功した", exZh: "多虧了你成功了" }
     ],
     grammarTest: [
-      { q: "天気(  )、イベントが中止になった。", opts: ["によって", "について", "に関して"], correct: 0, explain: "「によって」表示原因。因為天氣,活動取消了。" },
-      { q: "この本は日本の歴史(  )書かれています。", opts: ["によって", "について", "に応じて"], correct: 1, explain: "「について」表示關於某主題。這本書是關於日本歷史寫的。" },
-      { q: "会議(  )、資料を準備してください。", opts: ["のおかげで", "に基づいて", "に関して"], correct: 2, explain: "「に関して」=「について」,表示關於。" },
-      { q: "宿題を____。[遺憾]", opts: ["忘れた", "忘れてしまった", "忘れている"], correct: 1, explain: "「てしまう」表示遺憾。" }
-    ],
-    vocabTest: [
-      { word: "予定", kana: "よてい", hint: "計畫" },
-      { word: "地震", kana: "じしん", hint: "地震" },
-      { word: "情報", kana: "じょうほう", hint: "資訊" },
-      { word: "環境", kana: "かんきょう", hint: "環境" },
-      { word: "原因", kana: "げんいん", hint: "原因" },
-      { word: "影響", kana: "えいきょう", hint: "影響" },
-      { word: "方法", kana: "ほうほう", hint: "方法" },
-      { word: "説明", kana: "せつめい", hint: "說明" }
+      { q: "天気(  )予定が変わる", opts: ["によって", "について", "のおかげで"], correct: 0, explain: "「によって」表示原因" },
+      { q: "環境問題(  )話す", opts: ["によって", "について", "を中心に"], correct: 1, explain: "「について」表示關於" },
+      { q: "宿題を忘れ(  )", opts: ["た", "てしまった", "ている"], correct: 1, explain: "「てしまう」表示遺憾" }
     ],
     listening: {
       task1: {
         dialogue: [
-          { text: "男の人と女の人が話しています。女の人はこのあと何をしますか。", voice: "male" },
-          { text: "明日の会議について調べなきゃ。", voice: "female" },
-          { text: "天気予報によれば、明日は雨みたいだよ。", voice: "male" },
-          { text: "じゃ、傘を持っていかなきゃ。資料も準備しないと。", voice: "female" }
+          { text: "男女が話しています", voice: "male" },
+          { text: "明日の会議について調べなきゃ", voice: "female" },
+          { text: "天気予報によれば雨みたいだよ", voice: "male" },
+          { text: "じゃ傘を持っていかなきゃ", voice: "female" }
         ],
-        question: "女の人はこのあと何をしますか。",
-        options: ["会議に参加する", "資料を準備する", "天気予報を見る", "傘を買いに行く"],
+        question: "女の人はこのあと何をしますか",
+        options: ["会議に参加", "資料を準備", "傘を買う", "家に帰る"],
         correct: 1,
-        explain: "女生說「資料も準備しないと」,所以要準備資料。"
+        explain: "女生說要準備資料"
       },
       task2: {
-        dialogue: [
-          { text: "先生と学生が環境問題について話しています。", voice: "male" },
-          { text: "環境問題について、どう思いますか。", voice: "male" },
-          { text: "地球温暖化により、いろいろな影響が出ていると思います。", voice: "female" },
-          { text: "そうですね。具体的にはどんな影響がありますか。", voice: "male" },
-          { text: "氷が溶けたり、異常気象が起きたりしています。", voice: "female" }
-        ],
-        question: "学生が言った影響は何ですか。",
-        options: ["氷が溶けること", "雨が降ること", "雪が降ること", "風が吹くこと"],
-        correct: 0,
-        explain: "學生說「氷が溶けたり」,第一個影響是冰融化。"
-      },
-      task3: {
-        audio: "宿題を忘れてしまいました。",
-        text: "____を忘れてしまいました。",
+        audio: "宿題を忘れてしまいました",
+        text: "____を忘れてしまいました",
         answer: "宿題",
-        explain: "完整句子是「宿題を忘れてしまいました」。"
+        explain: "完整句是「宿題を忘れてしまいました」"
       }
     },
     reading: {
-      passage: "先週、台風により電車が止まってしまいました。そのため、会社に行くことができませんでした。天気によって、予定が変わることがよくあります。環境問題について調べていると、気候変動の影響で、異常気象が増えているという情報を見つけました。",
+      passage: "先週、台風により電車が止まりました。会社に行けませんでした。天気によって予定が変わることがよくあります。",
       questions: [
-        { q: "なぜ会社に行けませんでしたか。", opts: ["台風で電車が止まったから", "病気だったから", "休みだったから", "忘れたから"], correct: 0, explain: "文章說「台風により電車が止まった」,所以無法去公司。" },
-        { q: "筆者が調べているのは何ですか。", opts: ["天気予報", "環境問題", "会社の仕事", "電車の時刻表"], correct: 1, explain: "文章中「環境問題について調べていると」。" },
-        { q: "異常気象が増えている原因は何ですか。", opts: ["台風", "電車", "気候変動", "会社"], correct: 2, explain: "文章說「気候変動の影響で」。" }
+        { q: "なぜ会社に行けませんでしたか", opts: ["台風で電車が止まった", "病気だった", "休みだった", "忘れた"], correct: 0, explain: "文章說「台風により電車が止まった」" },
+        { q: "何が予定を変えますか", opts: ["会社", "電車", "天気", "台風"], correct: 2, explain: "「天気によって予定が変わる」" }
       ]
     }
   },
   2: {
-    title: "Day 2 - N4基礎補強",
+    title: "Day 2 - N4基礎",
     grammar: [
-      {
-        pattern: "〜ために / 〜ように",
-        meaning: "為了⋯⋯(目的)",
-        usage: "動詞辞書形/名詞の + ために;  動詞辞書形/ない形 + ように",
-        note: "「ために」用於有意志的動作;「ように」用於無意志的狀態。",
-        examples: [
-          { ja: "合格するために、毎日勉強しています。", kana: "合格(ごうかく)するために、毎日(まいにち)勉強(べんきょう)しています。", zh: "為了合格,每天都在學習。" },
-          { ja: "忘れないように、メモを取ります。", kana: "忘(わす)れないように、メモを取(と)ります。", zh: "為了不忘記,做筆記。" }
-        ]
-      },
-      {
-        pattern: "〜ことになる / 〜ことにする",
-        meaning: "決定⋯⋯(客觀/主觀)",
-        usage: "動詞辞書形/ない形 + ことになる/ことにする",
-        note: "「ことになる」=客觀決定;「ことにする」=主觀決定。",
-        examples: [
-          { ja: "来月、転勤することになりました。", kana: "来月(らいげつ)、転勤(てんきん)することになりました。", zh: "下個月要調職了(公司決定)。" },
-          { ja: "毎朝、走ることにしました。", kana: "毎朝(まいあさ)、走(はし)ることにしました。", zh: "決定每天早上跑步(自己決定)。" }
-        ]
-      },
-      {
-        pattern: "〜ばかり",
-        meaning: "淨是⋯⋯;只有⋯⋯;剛剛⋯⋯",
-        usage: "名詞/動詞た形 + ばかり",
-        note: "可表示「只做某事」或「剛做完」。",
-        examples: [
-          { ja: "ゲームばかりしないで、勉強しなさい。", kana: "ゲームばかりしないで、勉強(べんきょう)しなさい。", zh: "別只玩遊戲,要學習。" },
-          { ja: "今、起きたばかりです。", kana: "今(いま)、起(お)きたばかりです。", zh: "剛剛才起床。" }
-        ]
-      }
+      { pattern: "〜ために", meaning: "為了⋯", examples: [
+        { ja: "合格するために勉強する", kana: "合格(ごうかく)するために勉強(べんきょう)する", zh: "為了合格而學習" }
+      ]},
+      { pattern: "〜ことになる", meaning: "決定⋯(客觀)", examples: [
+        { ja: "転勤することになった", kana: "転勤(てんきん)することになった", zh: "要調職了" }
+      ]},
+      { pattern: "〜ばかり", meaning: "淨是⋯;剛⋯", examples: [
+        { ja: "ゲームばかりしている", kana: "ゲームばかりしている", zh: "淨是玩遊戲" }
+      ]}
     ],
     vocabulary: [
-      { word: "合格", kana: "ごうかく", type: "名詞", meaning: "合格", ex: "試験に合格する", exZh: "考試合格" },
-      { word: "勉強", kana: "べんきょう", type: "名詞", meaning: "學習", ex: "日本語を勉強する", exZh: "學日文" },
-      { word: "忘れる", kana: "わすれる", type: "動II", meaning: "忘記", ex: "約束を忘れる", exZh: "忘記約定" },
-      { word: "取る", kana: "とる", type: "動I", meaning: "拿、取", ex: "写真を取る", exZh: "拍照" },
-      { word: "来月", kana: "らいげつ", type: "名詞", meaning: "下個月", ex: "来月会いましょう", exZh: "下個月見" },
-      { word: "転勤", kana: "てんきん", type: "名詞", meaning: "調職", ex: "東京に転勤する", exZh: "調職到東京" },
-      { word: "毎朝", kana: "まいあさ", type: "名詞", meaning: "每天早上", ex: "毎朝走る", exZh: "每天早上跑步" },
-      { word: "走る", kana: "はしる", type: "動I", meaning: "跑", ex: "公園で走る", exZh: "在公園跑步" },
+      { word: "合格", kana: "ごうかく", type: "名詞", meaning: "合格", ex: "試験に合格", exZh: "考試合格" },
+      { word: "勉強", kana: "べんきょう", type: "名詞", meaning: "學習", ex: "勉強する", exZh: "學習" },
+      { word: "転勤", kana: "てんきん", type: "名詞", meaning: "調職", ex: "転勤する", exZh: "調職" },
+      { word: "試験", kana: "しけん", type: "名詞", meaning: "考試", ex: "試験を受ける", exZh: "考試" },
+      { word: "約束", kana: "やくそく", type: "名詞", meaning: "約定", ex: "約束を守る", exZh: "守約" },
+      { word: "目的", kana: "もくてき", type: "名詞", meaning: "目的", ex: "旅行の目的", exZh: "旅行目的" },
+      { word: "準備", kana: "じゅんび", type: "名詞", meaning: "準備", ex: "準備する", exZh: "準備" },
       { word: "決める", kana: "きめる", type: "動II", meaning: "決定", ex: "予定を決める", exZh: "決定計畫" },
-      { word: "今", kana: "いま", type: "名詞", meaning: "現在", ex: "今行きます", exZh: "現在去" },
-      { word: "試験", kana: "しけん", type: "名詞", meaning: "考試", ex: "試験を受ける", exZh: "參加考試" },
-      { word: "約束", kana: "やくそく", type: "名詞", meaning: "約定", ex: "約束を守る", exZh: "遵守約定" },
-      { word: "写真", kana: "しゃしん", type: "名詞", meaning: "照片", ex: "写真を撮る", exZh: "拍照" },
-      { word: "会う", kana: "あう", type: "動I", meaning: "見面", ex: "友達に会う", exZh: "跟朋友見面" },
-      { word: "公園", kana: "こうえん", type: "名詞", meaning: "公園", ex: "公園で遊ぶ", exZh: "在公園玩" },
-      { word: "守る", kana: "まもる", type: "動I", meaning: "遵守", ex: "ルールを守る", exZh: "遵守規則" },
-      { word: "撮る", kana: "とる", type: "動I", meaning: "拍攝", ex: "動画を撮る", exZh: "拍影片" },
-      { word: "遊ぶ", kana: "あそぶ", type: "動I", meaning: "玩", ex: "友達と遊ぶ", exZh: "跟朋友玩" },
-      { word: "目的", kana: "もくてき", type: "名詞", meaning: "目的", ex: "旅行の目的", exZh: "旅行的目的" },
-      { word: "準備", kana: "じゅんび", type: "名詞", meaning: "準備", ex: "準備する", exZh: "準備" }
+      { word: "守る", kana: "まもる", type: "動I", meaning: "遵守", ex: "約束を守る", exZh: "遵守約定" },
+      { word: "忘れる", kana: "わすれる", type: "動II", meaning: "忘記", ex: "約束を忘れる", exZh: "忘記約定" }
     ],
     phrases: [
-      { ja: "〜のために", meaning: "為了⋯⋯", ex: "家族のために働く", exZh: "為了家人工作" },
-      { ja: "〜ようにする", meaning: "盡量⋯⋯;努力⋯⋯", ex: "早く寝るようにする", exZh: "盡量早睡" },
-      { ja: "〜ことにする", meaning: "決定⋯⋯", ex: "行くことにする", exZh: "決定要去" },
-      { ja: "〜ことになる", meaning: "變成⋯⋯(決定)", ex: "引っ越すことになった", exZh: "變成要搬家了" },
-      { ja: "〜たばかり", meaning: "剛剛⋯⋯", ex: "食べたばかり", exZh: "剛吃完" }
+      { ja: "〜のために", meaning: "為了⋯", ex: "家族のために働く", exZh: "為了家人工作" },
+      { ja: "〜ことになる", meaning: "變成⋯", ex: "引っ越すことになった", exZh: "要搬家了" },
+      { ja: "〜たばかり", meaning: "剛剛⋯", ex: "食べたばかり", exZh: "剛吃完" }
     ],
     grammarTest: [
-      { q: "合格(  )、毎日勉強しています。", opts: ["するために", "するように", "することになって"], correct: 0, explain: "「ために」用於有意志的目的。為了合格而學習。" },
-      { q: "忘れ(  )、メモを取ります。", opts: ["ために", "ないように", "ばかり"], correct: 1, explain: "「ように」用於無意志的狀態。為了不忘記。" },
-      { q: "来月、転勤(  )。", opts: ["することにした", "することになった", "するばかり"], correct: 1, explain: "「ことになる」表示客觀決定(公司決定)。" },
-      { q: "ゲーム(  )しないで、勉強しなさい。", opts: ["ために", "ように", "ばかり"], correct: 2, explain: "「ばかり」表示只做某事。不要只玩遊戲。" }
-    ],
-    vocabTest: [
-      { word: "合格", kana: "ごうかく", hint: "合格" },
-      { word: "勉強", kana: "べんきょう", hint: "學習" },
-      { word: "来月", kana: "らいげつ", hint: "下個月" },
-      { word: "転勤", kana: "てんきん", hint: "調職" },
-      { word: "毎朝", kana: "まいあさ", hint: "每天早上" },
-      { word: "試験", kana: "しけん", hint: "考試" },
-      { word: "約束", kana: "やくそく", hint: "約定" },
-      { word: "目的", kana: "もくてき", hint: "目的" }
+      { q: "合格(  )勉強する", opts: ["するために", "することになって", "するばかり"], correct: 0, explain: "「ために」表示目的" },
+      { q: "転勤(  )", opts: ["することにした", "することになった", "するばかり"], correct: 1, explain: "「ことになる」表示客觀決定" },
+      { q: "ゲーム(  )している", opts: ["ために", "ように", "ばかり"], correct: 2, explain: "「ばかり」表示只做某事" }
     ],
     listening: {
       task1: {
         dialogue: [
-          { text: "男の人と女の人が話しています。男の人は何のために勉強していますか。", voice: "male" },
-          { text: "毎日、図書館で勉強しているね。", voice: "female" },
-          { text: "うん、来月の試験に合格するために頑張っているんだ。", voice: "male" },
-          { text: "すごいね。応援してるよ!", voice: "female" }
+          { text: "友達が話しています", voice: "male" },
+          { text: "毎日図書館で勉強してるね", voice: "female" },
+          { text: "試験に合格するために頑張ってる", voice: "male" }
         ],
-        question: "男の人は何のために勉強していますか。",
-        options: ["仕事のため", "試験に合格するため", "趣味のため", "友達のため"],
+        question: "男の人は何のために勉強していますか",
+        options: ["仕事のため", "試験のため", "趣味のため", "友達のため"],
         correct: 1,
-        explain: "男生說「試験に合格するために」。"
+        explain: "「試験に合格するために」"
       },
       task2: {
-        dialogue: [
-          { text: "先生と学生が話しています。", voice: "male" },
-          { text: "最近、どうですか。", voice: "male" },
-          { text: "来月、東京に転勤することになりました。", voice: "female" },
-          { text: "そうですか。頑張ってください。", voice: "male" }
-        ],
-        question: "学生はどうなりましたか。",
-        options: ["結婚することになった", "転勤することになった", "退職することになった", "昇進することになった"],
-        correct: 1,
-        explain: "學生說「転勤することになりました」。"
-      },
-      task3: {
-        audio: "合格するために頑張ります。",
-        text: "____するために頑張ります。",
+        audio: "合格するために頑張ります",
+        text: "____するために頑張ります",
         answer: "合格",
-        explain: "完整句子是「合格するために頑張ります」。"
+        explain: "完整句是「合格するために頑張ります」"
       }
     },
     reading: {
-      passage: "私は来月、東京に転勤することになりました。新しい環境で働くために、今から準備をしています。忘れないように、毎日やることをメモに書いています。最近は忙しくて、ゲームばかりしていた時間がなくなりました。でも、これも目的のためです。",
+      passage: "来月、東京に転勤することになりました。新しい環境で働くために、今準備をしています。",
       questions: [
-        { q: "筆者はなぜ準備していますか。", opts: ["旅行のため", "転勤のため", "試験のため", "結婚のため"], correct: 1, explain: "文章說「転勤するために準備している」。" },
-        { q: "筆者は何をメモに書いていますか。", opts: ["予定", "やること", "感想", "夢"], correct: 1, explain: "文章說「やることをメモに書いている」。" },
-        { q: "最近、筆者の生活はどうですか。", opts: ["暇になった", "忙しくなった", "楽になった", "つまらなくなった"], correct: 1, explain: "文章說「最近は忙しくて」。" }
+        { q: "筆者はなぜ準備していますか", opts: ["旅行のため", "転勤のため", "試験のため", "結婚のため"], correct: 1, explain: "「転勤のために準備している」" },
+        { q: "筆者の転勤はいつですか", opts: ["先月", "今月", "来月", "来年"], correct: 2, explain: "「来月転勤する」" }
+      ]
+    }
+  },
+  3: {
+    title: "Day 3 - N4進階",
+    grammar: [
+      { pattern: "〜そうだ", meaning: "看起來⋯", examples: [{ ja: "美味しそうなケーキ", kana: "美味(おい)しそうなケーキ", zh: "看起來好吃的蛋糕" }]},
+      { pattern: "〜らしい", meaning: "聽說⋯", examples: [{ ja: "田中さんは病気らしい", kana: "田中(たなか)さんは病気(びょうき)らしい", zh: "聽說田中先生生病了" }]},
+      { pattern: "〜みたいだ", meaning: "好像⋯", examples: [{ ja: "彼は学生みたいだ", kana: "彼(かれ)は学生(がくせい)みたいだ", zh: "他好像是學生" }]}
+    ],
+    vocabulary: [
+      { word: "美味しい", kana: "おいしい", type: "い形", meaning: "好吃", ex: "美味しい料理", exZh: "好吃的料理" },
+      { word: "病気", kana: "びょうき", type: "名詞", meaning: "生病", ex: "病気になる", exZh: "生病" },
+      { word: "風邪", kana: "かぜ", type: "名詞", meaning: "感冒", ex: "風邪を引く", exZh: "感冒" },
+      { word: "元気", kana: "げんき", type: "な形", meaning: "有精神", ex: "元気です", exZh: "很有精神" },
+      { word: "静か", kana: "しずか", type: "な形", meaning: "安靜", ex: "静かな場所", exZh: "安靜的地方" },
+      { word: "簡単", kana: "かんたん", type: "な形", meaning: "簡單", ex: "簡単な問題", exZh: "簡單的問題" },
+      { word: "楽しい", kana: "たのしい", type: "い形", meaning: "快樂", ex: "楽しい時間", exZh: "快樂的時光" },
+      { word: "嬉しい", kana: "うれしい", type: "い形", meaning: "高興", ex: "嬉しいです", exZh: "很高興" },
+      { word: "怖い", kana: "こわい", type: "い形", meaning: "可怕", ex: "怖い映画", exZh: "恐怖電影" },
+      { word: "降る", kana: "ふる", type: "動I", meaning: "下(雨雪)", ex: "雨が降る", exZh: "下雨" }
+    ],
+    phrases: [
+      { ja: "〜そうだ", meaning: "看起來⋯", ex: "美味しそう", exZh: "看起來好吃" },
+      { ja: "〜らしい", meaning: "聽說⋯", ex: "雨らしい", exZh: "聽說會下雨" },
+      { ja: "〜みたいだ", meaning: "好像⋯", ex: "学生みたい", exZh: "好像是學生" }
+    ],
+    grammarTest: [
+      { q: "この料理は(  )", opts: ["美味しそうだ", "美味しいらしい", "美味しいみたい"], correct: 0, explain: "看外觀判斷用「そうだ」" },
+      { q: "田中さんは来ない(  )", opts: ["そうだ", "らしい", "みたい"], correct: 1, explain: "傳聞用「らしい」" },
+      { q: "彼は学生(  )", opts: ["そう", "らしい", "みたいだ"], correct: 2, explain: "口語推測用「みたいだ」" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "友達が話しています", voice: "male" },
+          { text: "このケーキ美味しそうね", voice: "female" },
+          { text: "食べてみようか", voice: "male" }
+        ],
+        question: "女の人はケーキをどう思いますか",
+        options: ["美味しそう", "高そう", "大きそう", "甘そう"],
+        correct: 0,
+        explain: "「美味しそう」と言っています"
+      },
+      task2: {
+        audio: "雨が降りそうです",
+        text: "____が降りそうです",
+        answer: "雨",
+        explain: "完整句是「雨が降りそうです」"
+      }
+    },
+    reading: {
+      passage: "昨日、新しいレストランに行きました。料理が美味しそうでした。食べてみると本当に美味しかったです。",
+      questions: [
+        { q: "料理はどうでしたか", opts: ["美味しそうで実際も美味しかった", "まずかった", "普通だった", "高かった"], correct: 0, explain: "「美味しそう」で「本当に美味しかった」" },
+        { q: "筆者はいつレストランに行きましたか", opts: ["今日", "昨日", "明日", "先週"], correct: 1, explain: "「昨日行きました」" }
+      ]
+    }
+  },
+  4: {
+    title: "Day 4 - N3準備",
+    grammar: [
+      { pattern: "〜わけだ", meaning: "難怪⋯;當然⋯", examples: [{ ja: "彼は毎日練習している。上手なわけだ", kana: "彼(かれ)は毎日(まいにち)練習(れんしゅう)している。上手(じょうず)なわけだ", zh: "他每天練習,難怪這麼厲害" }]},
+      { pattern: "〜はずだ", meaning: "應該⋯", examples: [{ ja: "彼はもう着いたはずだ", kana: "彼(かれ)はもう着(つ)いたはずだ", zh: "他應該已經到了" }]},
+      { pattern: "〜べきだ", meaning: "應該⋯(義務)", examples: [{ ja: "約束は守るべきだ", kana: "約束(やくそく)は守(まも)るべきだ", zh: "約定應該要遵守" }]}
+    ],
+    vocabulary: [
+      { word: "練習", kana: "れんしゅう", type: "名詞", meaning: "練習", ex: "練習する", exZh: "練習" },
+      { word: "上手", kana: "じょうず", type: "な形", meaning: "厲害", ex: "上手です", exZh: "很厲害" },
+      { word: "下手", kana: "へた", type: "な形", meaning: "不擅長", ex: "下手です", exZh: "不擅長" },
+      { word: "着く", kana: "つく", type: "動I", meaning: "抵達", ex: "駅に着く", exZh: "到車站" },
+      { word: "出発", kana: "しゅっぱつ", type: "名詞", meaning: "出發", ex: "出発する", exZh: "出發" },
+      { word: "到着", kana: "とうちゃく", type: "名詞", meaning: "抵達", ex: "到着する", exZh: "抵達" },
+      { word: "遅れる", kana: "おくれる", type: "動II", meaning: "遲到", ex: "電車が遅れる", exZh: "電車誤點" },
+      { word: "間に合う", kana: "まにあう", type: "動I", meaning: "趕得上", ex: "会議に間に合う", exZh: "趕上會議" },
+      { word: "頑張る", kana: "がんばる", type: "動I", meaning: "加油", ex: "頑張ります", exZh: "我會加油" },
+      { word: "成功", kana: "せいこう", type: "名詞", meaning: "成功", ex: "成功する", exZh: "成功" }
+    ],
+    phrases: [
+      { ja: "〜わけだ", meaning: "難怪⋯", ex: "だから遅れたわけだ", exZh: "難怪遲到了" },
+      { ja: "〜はずだ", meaning: "應該⋯", ex: "知っているはずだ", exZh: "應該知道" },
+      { ja: "〜べきだ", meaning: "應該⋯", ex: "勉強すべきだ", exZh: "應該學習" }
+    ],
+    grammarTest: [
+      { q: "毎日練習している。上手な(  )", opts: ["わけだ", "はずだ", "べきだ"], correct: 0, explain: "「わけだ」表示理所當然" },
+      { q: "彼はもう着いた(  )", opts: ["わけだ", "はずだ", "べきだ"], correct: 1, explain: "「はずだ」表示推測" },
+      { q: "約束は守る(  )", opts: ["わけだ", "はずだ", "べきだ"], correct: 2, explain: "「べきだ」表示義務" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "同僚が話しています", voice: "male" },
+          { text: "田中さんはもう着いたはずですよ", voice: "female" },
+          { text: "そうですか。確認してみます", voice: "male" }
+        ],
+        question: "田中さんはどうですか",
+        options: ["もう着いたはず", "まだ着いていない", "遅れている", "来ない"],
+        correct: 0,
+        explain: "「着いたはず」と言っています"
+      },
+      task2: {
+        audio: "毎日練習しています",
+        text: "毎日____しています",
+        answer: "練習",
+        explain: "完整句是「毎日練習しています」"
+      }
+    },
+    reading: {
+      passage: "彼は毎日3時間勉強しています。だから成績がいいわけです。試験にも合格するはずです。",
+      questions: [
+        { q: "なぜ成績がいいですか", opts: ["毎日勉強しているから", "頭がいいから", "運がいいから", "先生がいいから"], correct: 0, explain: "「毎日勉強しているから」" },
+        { q: "試験はどうなりますか", opts: ["落ちる", "合格するはず", "受けない", "わからない"], correct: 1, explain: "「合格するはず」" }
+      ]
+    }
+  },
+  5: {
+    title: "Day 5 - N3核心",
+    grammar: [
+      { pattern: "〜に対して", meaning: "對於⋯", examples: [{ ja: "子供に対して優しい", kana: "子供(こども)に対(たい)して優(やさ)しい", zh: "對小孩很溫柔" }]},
+      { pattern: "〜に関わらず", meaning: "不管⋯", examples: [{ ja: "年齢に関わらず参加できる", kana: "年齢(ねんれい)に関(かか)わらず参加(さんか)できる", zh: "不管年齡都能參加" }]},
+      { pattern: "〜に反して", meaning: "與⋯相反", examples: [{ ja: "期待に反して失敗した", kana: "期待(きたい)に反(はん)して失敗(しっぱい)した", zh: "與期待相反失敗了" }]}
+    ],
+    vocabulary: [
+      { word: "子供", kana: "こども", type: "名詞", meaning: "小孩", ex: "子供が遊ぶ", exZh: "小孩玩耍" },
+      { word: "優しい", kana: "やさしい", type: "い形", meaning: "溫柔", ex: "優しい人", exZh: "溫柔的人" },
+      { word: "年齢", kana: "ねんれい", type: "名詞", meaning: "年齡", ex: "年齢制限", exZh: "年齡限制" },
+      { word: "参加", kana: "さんか", type: "名詞", meaning: "參加", ex: "参加する", exZh: "參加" },
+      { word: "期待", kana: "きたい", type: "名詞", meaning: "期待", ex: "期待する", exZh: "期待" },
+      { word: "失敗", kana: "しっぱい", type: "名詞", meaning: "失敗", ex: "失敗する", exZh: "失敗" },
+      { word: "成功", kana: "せいこう", type: "名詞", meaning: "成功", ex: "成功する", exZh: "成功" },
+      { word: "反対", kana: "はんたい", type: "名詞", meaning: "反對", ex: "反対する", exZh: "反對" },
+      { word: "賛成", kana: "さんせい", type: "名詞", meaning: "贊成", ex: "賛成する", exZh: "贊成" },
+      { word: "意見", kana: "いけん", type: "名詞", meaning: "意見", ex: "意見を言う", exZh: "說意見" }
+    ],
+    phrases: [
+      { ja: "〜に対して", meaning: "對於⋯", ex: "学生に対して厳しい", exZh: "對學生很嚴格" },
+      { ja: "〜に関わらず", meaning: "不管⋯", ex: "天気に関わらず", exZh: "不管天氣" },
+      { ja: "〜に反して", meaning: "與⋯相反", ex: "予想に反して", exZh: "與預想相反" }
+    ],
+    grammarTest: [
+      { q: "子供(  )優しい", opts: ["に対して", "に関わらず", "に反して"], correct: 0, explain: "「に対して」表示對象" },
+      { q: "年齢(  )参加できる", opts: ["に対して", "に関わらず", "に反して"], correct: 1, explain: "「に関わらず」表示不管" },
+      { q: "期待(  )失敗した", opts: ["に対して", "に関わらず", "に反して"], correct: 2, explain: "「に反して」表示相反" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "先生と学生が話しています", voice: "male" },
+          { text: "年齢に関わらず誰でも参加できますよ", voice: "male" },
+          { text: "わかりました。ありがとうございます", voice: "female" }
+        ],
+        question: "誰が参加できますか",
+        options: ["年齢に関わらず誰でも", "若い人だけ", "学生だけ", "大人だけ"],
+        correct: 0,
+        explain: "「年齢に関わらず誰でも」"
+      },
+      task2: {
+        audio: "子供に対して優しい",
+        text: "____に対して優しい",
+        answer: "子供",
+        explain: "完整句是「子供に対して優しい」"
+      }
+    },
+    reading: {
+      passage: "この大会は年齢に関わらず参加できます。子供に対しても大人に対しても平等です。",
+      questions: [
+        { q: "誰が参加できますか", opts: ["年齢に関わらず誰でも", "子供だけ", "大人だけ", "学生だけ"], correct: 0, explain: "「年齢に関わらず参加できる」" },
+        { q: "この大会の特徴は何ですか", opts: ["難しい", "平等", "厳しい", "簡単"], correct: 1, explain: "「平等です」" }
+      ]
+    }
+  },
+  6: {
+    title: "Day 6 - N3核心",
+    grammar: [
+      { pattern: "〜おかげで", meaning: "多虧⋯", examples: [{ ja: "先生のおかげで合格した", kana: "先生(せんせい)のおかげで合格(ごうかく)した", zh: "多虧老師才合格" }]},
+      { pattern: "〜せいで", meaning: "因為⋯(負面)", examples: [{ ja: "雨のせいで遅れた", kana: "雨(あめ)のせいで遅(おく)れた", zh: "因為下雨遲到了" }]},
+      { pattern: "〜上で", meaning: "在⋯上;⋯之後", examples: [{ ja: "仕事の上で大切だ", kana: "仕事(しごと)の上(うえ)で大切(たいせつ)だ", zh: "在工作上很重要" }]}
+    ],
+    vocabulary: [
+      { word: "先生", kana: "せんせい", type: "名詞", meaning: "老師", ex: "先生に聞く", exZh: "問老師" },
+      { word: "雨", kana: "あめ", type: "名詞", meaning: "雨", ex: "雨が降る", exZh: "下雨" },
+      { word: "雪", kana: "ゆき", type: "名詞", meaning: "雪", ex: "雪が降る", exZh: "下雪" },
+      { word: "仕事", kana: "しごと", type: "名詞", meaning: "工作", ex: "仕事をする", exZh: "工作" },
+      { word: "大切", kana: "たいせつ", type: "な形", meaning: "重要", ex: "大切なこと", exZh: "重要的事" },
+      { word: "重要", kana: "じゅうよう", type: "な形", meaning: "重要", ex: "重要な問題", exZh: "重要問題" },
+      { word: "必要", kana: "ひつよう", type: "な形", meaning: "必要", ex: "必要なもの", exZh: "必要的東西" },
+      { word: "不必要", kana: "ふひつよう", type: "な形", meaning: "不必要", ex: "不必要だ", exZh: "不必要" },
+      { word: "助ける", kana: "たすける", type: "動II", meaning: "幫助", ex: "人を助ける", exZh: "幫助人" },
+      { word: "困る", kana: "こまる", type: "動I", meaning: "困擾", ex: "困っている", exZh: "很困擾" }
+    ],
+    phrases: [
+      { ja: "〜のおかげで", meaning: "多虧⋯", ex: "あなたのおかげで", exZh: "多虧了你" },
+      { ja: "〜のせいで", meaning: "因為⋯", ex: "雨のせいで", exZh: "因為下雨" },
+      { ja: "〜の上で", meaning: "在⋯上", ex: "健康の上で", exZh: "在健康上" }
+    ],
+    grammarTest: [
+      { q: "先生(  )合格した", opts: ["のおかげで", "のせいで", "の上で"], correct: 0, explain: "「おかげで」表示正面原因" },
+      { q: "雨(  )遅れた", opts: ["のおかげで", "のせいで", "の上で"], correct: 1, explain: "「せいで」表示負面原因" },
+      { q: "仕事(  )大切だ", opts: ["のおかげで", "のせいで", "の上で"], correct: 2, explain: "「上で」表示在某方面" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "学生が話しています", voice: "female" },
+          { text: "先生のおかげで合格できました", voice: "female" },
+          { text: "本当によかったですね", voice: "male" }
+        ],
+        question: "なぜ合格できましたか",
+        options: ["先生のおかげ", "自分の努力", "運がよかった", "簡単だった"],
+        correct: 0,
+        explain: "「先生のおかげで」"
+      },
+      task2: {
+        audio: "雨のせいで遅れました",
+        text: "____のせいで遅れました",
+        answer: "雨",
+        explain: "完整句是「雨のせいで遅れました」"
+      }
+    },
+    reading: {
+      passage: "先生のおかげで試験に合格しました。でも雨のせいで祝賀会に遅れてしまいました。",
+      questions: [
+        { q: "なぜ合格しましたか", opts: ["先生のおかげ", "運がよかった", "簡単だった", "頑張った"], correct: 0, explain: "「先生のおかげで合格した」" },
+        { q: "なぜ祝賀会に遅れましたか", opts: ["寝坊した", "雨のせい", "道に迷った", "忘れた"], correct: 1, explain: "「雨のせいで遅れた」" }
+      ]
+    }
+  },
+  7: {
+    title: "Day 7 - N3核心",
+    grammar: [
+      { pattern: "〜ところだ", meaning: "正要⋯;剛⋯;正在⋯", examples: [{ ja: "今出かけるところだ", kana: "今(いま)出(で)かけるところだ", zh: "現在正要出門" }]},
+      { pattern: "〜うちに", meaning: "趁⋯的時候", examples: [{ ja: "若いうちに勉強する", kana: "若(わか)いうちに勉強(べんきょう)する", zh: "趁年輕時學習" }]},
+      { pattern: "〜次第", meaning: "一⋯就⋯", examples: [{ ja: "到着次第連絡します", kana: "到着(とうちゃく)次第(しだい)連絡(れんらく)します", zh: "一到就聯絡" }]}
+    ],
+    vocabulary: [
+      { word: "出かける", kana: "でかける", type: "動II", meaning: "出門", ex: "出かける", exZh: "出門" },
+      { word: "若い", kana: "わかい", type: "い形", meaning: "年輕", ex: "若い人", exZh: "年輕人" },
+      { word: "連絡", kana: "れんらく", type: "名詞", meaning: "聯絡", ex: "連絡する", exZh: "聯絡" },
+      { word: "到着", kana: "とうちゃく", type: "名詞", meaning: "抵達", ex: "到着する", exZh: "抵達" },
+      { word: "出発", kana: "しゅっぱつ", type: "名詞", meaning: "出發", ex: "出発する", exZh: "出發" },
+      { word: "帰る", kana: "かえる", type: "動I", meaning: "回家", ex: "家に帰る", exZh: "回家" },
+      { word: "戻る", kana: "もどる", type: "動I", meaning: "回來", ex: "部屋に戻る", exZh: "回房間" },
+      { word: "間", kana: "あいだ", type: "名詞", meaning: "期間", ex: "休みの間", exZh: "休假期間" },
+      { word: "最中", kana: "さいちゅう", type: "名詞", meaning: "正在", ex: "会議の最中", exZh: "會議中" },
+      { word: "直後", kana: "ちょくご", type: "名詞", meaning: "之後", ex: "食事の直後", exZh: "用餐之後" }
+    ],
+    phrases: [
+      { ja: "〜ところだ", meaning: "正要⋯", ex: "食べるところ", exZh: "正要吃" },
+      { ja: "〜うちに", meaning: "趁⋯", ex: "若いうちに", exZh: "趁年輕" },
+      { ja: "〜次第", meaning: "一⋯就⋯", ex: "終わり次第", exZh: "一結束就" }
+    ],
+    grammarTest: [
+      { q: "今出かける(  )", opts: ["ところだ", "うちに", "次第"], correct: 0, explain: "「ところだ」表示正要做" },
+      { q: "若い(  )勉強する", opts: ["ところだ", "うちに", "次第"], correct: 1, explain: "「うちに」表示趁某時候" },
+      { q: "到着(  )連絡します", opts: ["ところだ", "うちに", "次第"], correct: 2, explain: "「次第」表示一⋯就⋯" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "電話で話しています", voice: "female" },
+          { text: "今出かけるところです", voice: "female" },
+          { text: "じゃあまた後で", voice: "male" }
+        ],
+        question: "女の人は今どうしますか",
+        options: ["出かけるところ", "帰るところ", "食べるところ", "寝るところ"],
+        correct: 0,
+        explain: "「出かけるところ」"
+      },
+      task2: {
+        audio: "若いうちに勉強しなさい",
+        text: "____うちに勉強しなさい",
+        answer: "若い",
+        explain: "完整句是「若いうちに勉強しなさい」"
+      }
+    },
+    reading: {
+      passage: "今出かけるところです。到着次第連絡します。若いうちに色々な経験をしたいです。",
+      questions: [
+        { q: "筆者は今どうしますか", opts: ["出かけるところ", "帰ったところ", "食べているところ", "寝ているところ"], correct: 0, explain: "「出かけるところ」" },
+        { q: "いつ連絡しますか", opts: ["明日", "来週", "到着次第", "帰ってから"], correct: 2, explain: "「到着次第連絡する」" }
+      ]
+    }
+  },
+  8: {
+    title: "Day 8 - N3核心",
+    grammar: [
+      { pattern: "〜限り", meaning: "只要⋯", examples: [{ ja: "生きている限り頑張る", kana: "生(い)きている限(かぎ)り頑張(がんば)る", zh: "只要活著就努力" }]},
+      { pattern: "〜以上", meaning: "既然⋯", examples: [{ ja: "約束した以上守る", kana: "約束(やくそく)した以上(いじょう)守(まも)る", zh: "既然約定了就要遵守" }]},
+      { pattern: "〜からには", meaning: "既然⋯", examples: [{ ja: "やるからには成功させる", kana: "やるからには成功(せいこう)させる", zh: "既然要做就要成功" }]}
+    ],
+    vocabulary: [
+      { word: "生きる", kana: "いきる", type: "動II", meaning: "活著", ex: "生きている", exZh: "活著" },
+      { word: "死ぬ", kana: "しぬ", type: "動I", meaning: "死", ex: "死んでしまう", exZh: "死了" },
+      { word: "約束", kana: "やくそく", type: "名詞", meaning: "約定", ex: "約束する", exZh: "約定" },
+      { word: "成功", kana: "せいこう", type: "名詞", meaning: "成功", ex: "成功する", exZh: "成功" },
+      { word: "失敗", kana: "しっぱい", type: "名詞", meaning: "失敗", ex: "失敗する", exZh: "失敗" },
+      { word: "諦める", kana: "あきらめる", type: "動II", meaning: "放棄", ex: "諦めない", exZh: "不放棄" },
+      { word: "続ける", kana: "つづける", type: "動II", meaning: "繼續", ex: "続けます", exZh: "繼續" },
+      { word: "止める", kana: "やめる", type: "動II", meaning: "停止", ex: "止めます", exZh: "停止" },
+      { word: "完成", kana: "かんせい", type: "名詞", meaning: "完成", ex: "完成する", exZh: "完成" },
+      { word: "達成", kana: "たっせい", type: "名詞", meaning: "達成", ex: "達成する", exZh: "達成" }
+    ],
+    phrases: [
+      { ja: "〜限り", meaning: "只要⋯", ex: "生きている限り", exZh: "只要活著" },
+      { ja: "〜以上", meaning: "既然⋯", ex: "約束した以上", exZh: "既然約定了" },
+      { ja: "〜からには", meaning: "既然⋯", ex: "やるからには", exZh: "既然要做" }
+    ],
+    grammarTest: [
+      { q: "生きている(  )頑張る", opts: ["限り", "以上", "からには"], correct: 0, explain: "「限り」表示只要" },
+      { q: "約束した(  )守る", opts: ["限り", "以上", "からには"], correct: 1, explain: "「以上」表示既然" },
+      { q: "やる(  )成功させる", opts: ["限り", "以上", "からには"], correct: 2, explain: "「からには」表示既然" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "友達が話しています", voice: "male" },
+          { text: "約束した以上守らなきゃ", voice: "male" },
+          { text: "そうだね", voice: "female" }
+        ],
+        question: "男の人はどうしますか",
+        options: ["約束を守る", "約束を破る", "約束を忘れる", "約束しない"],
+        correct: 0,
+        explain: "「約束した以上守る」"
+      },
+      task2: {
+        audio: "生きている限り頑張ります",
+        text: "____限り頑張ります",
+        answer: "生きている",
+        explain: "完整句是「生きている限り頑張ります」"
+      }
+    },
+    reading: {
+      passage: "約束した以上必ず守ります。やるからには成功させます。生きている限り諦めません。",
+      questions: [
+        { q: "筆者の態度は", opts: ["諦める", "頑張る", "迷う", "休む"], correct: 1, explain: "「頑張る」「諦めない」" },
+        { q: "筆者は約束をどうしますか", opts: ["破る", "忘れる", "守る", "しない"], correct: 2, explain: "「約束した以上守る」" }
+      ]
+    }
+  },
+  9: {
+    title: "Day 9 - N3核心",
+    grammar: [
+      { pattern: "〜とおりに", meaning: "按照⋯", examples: [{ ja: "説明書のとおりにする", kana: "説明書(せつめいしょ)のとおりにする", zh: "按照說明書做" }]},
+      { pattern: "〜通りに", meaning: "按照⋯", examples: [{ ja: "予定通りに進む", kana: "予定(よてい)通(どお)りに進(すす)む", zh: "按照預定進行" }]},
+      { pattern: "〜ような", meaning: "像⋯一樣", examples: [{ ja: "夢のような話", kana: "夢(ゆめ)のような話(はなし)", zh: "像夢一樣的話" }]}
+    ],
+    vocabulary: [
+      { word: "説明書", kana: "せつめいしょ", type: "名詞", meaning: "說明書", ex: "説明書を読む", exZh: "讀說明書" },
+      { word: "予定", kana: "よてい", type: "名詞", meaning: "預定", ex: "予定通り", exZh: "按照預定" },
+      { word: "進む", kana: "すすむ", type: "動I", meaning: "前進", ex: "順調に進む", exZh: "順利進行" },
+      { word: "夢", kana: "ゆめ", type: "名詞", meaning: "夢", ex: "夢を見る", exZh: "做夢" },
+      { word: "現実", kana: "げんじつ", type: "名詞", meaning: "現實", ex: "現実的", exZh: "現實的" },
+      { word: "理想", kana: "りそう", type: "名詞", meaning: "理想", ex: "理想的", exZh: "理想的" },
+      { word: "計画", kana: "けいかく", type: "名詞", meaning: "計畫", ex: "計画を立てる", exZh: "制定計畫" },
+      { word: "実行", kana: "じっこう", type: "名詞", meaning: "實行", ex: "実行する", exZh: "實行" },
+      { word: "順調", kana: "じゅんちょう", type: "な形", meaning: "順利", ex: "順調だ", exZh: "很順利" },
+      { word: "変更", kana: "へんこう", type: "名詞", meaning: "變更", ex: "変更する", exZh: "變更" }
+    ],
+    phrases: [
+      { ja: "〜のとおりに", meaning: "按照⋯", ex: "先生のとおりに", exZh: "按照老師說的" },
+      { ja: "〜通りに", meaning: "按照⋯", ex: "計画通りに", exZh: "按照計畫" },
+      { ja: "〜のような", meaning: "像⋯的", ex: "夢のような", exZh: "像夢一樣的" }
+    ],
+    grammarTest: [
+      { q: "説明書(  )する", opts: ["のとおりに", "のような", "限り"], correct: 0, explain: "「とおりに」表示按照" },
+      { q: "予定(  )進む", opts: ["のとおりに", "通りに", "のような"], correct: 1, explain: "「通りに」表示按照" },
+      { q: "夢(  )話", opts: ["のとおりに", "通りに", "のような"], correct: 2, explain: "「ような」表示像⋯一樣" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "同僚が話しています", voice: "male" },
+          { text: "計画通りに進んでいますか", voice: "male" },
+          { text: "はい順調です", voice: "female" }
+        ],
+        question: "計画はどうですか",
+        options: ["順調", "遅れている", "変更した", "中止した"],
+        correct: 0,
+        explain: "「順調です」"
+      },
+      task2: {
+        audio: "説明書のとおりにしてください",
+        text: "____のとおりにしてください",
+        answer: "説明書",
+        explain: "完整句是「説明書のとおりにしてください」"
+      }
+    },
+    reading: {
+      passage: "計画通りに進んでいます。説明書のとおりにやったので順調です。夢のような結果になりました。",
+      questions: [
+        { q: "計画はどうですか", opts: ["遅れている", "順調", "中止した", "失敗した"], correct: 1, explain: "「順調です」" },
+        { q: "結果はどうですか", opts: ["悪い", "普通", "夢のよう", "最悪"], correct: 2, explain: "「夢のような結果」" }
+      ]
+    }
+  },
+  10: {
+    title: "Day 10 - N3總復習",
+    grammar: [
+      { pattern: "〜際に", meaning: "在⋯之際", examples: [{ ja: "出発の際に確認する", kana: "出発(しゅっぱつ)の際(さい)に確認(かくにん)する", zh: "在出發之際確認" }]},
+      { pattern: "〜に際して", meaning: "在⋯之際", examples: [{ ja: "卒業に際して挨拶する", kana: "卒業(そつぎょう)に際(さい)して挨拶(あいさつ)する", zh: "在畢業之際致詞" }]},
+      { pattern: "〜をめぐって", meaning: "圍繞⋯", examples: [{ ja: "問題をめぐって議論する", kana: "問題(もんだい)をめぐって議論(ぎろん)する", zh: "圍繞問題討論" }]}
+    ],
+    vocabulary: [
+      { word: "出発", kana: "しゅっぱつ", type: "名詞", meaning: "出發", ex: "出発する", exZh: "出發" },
+      { word: "確認", kana: "かくにん", type: "名詞", meaning: "確認", ex: "確認する", exZh: "確認" },
+      { word: "卒業", kana: "そつぎょう", type: "名詞", meaning: "畢業", ex: "卒業する", exZh: "畢業" },
+      { word: "挨拶", kana: "あいさつ", type: "名詞", meaning: "打招呼", ex: "挨拶する", exZh: "打招呼" },
+      { word: "議論", kana: "ぎろん", type: "名詞", meaning: "討論", ex: "議論する", exZh: "討論" },
+      { word: "会議", kana: "かいぎ", type: "名詞", meaning: "會議", ex: "会議に出る", exZh: "參加會議" },
+      { word: "発表", kana: "はっぴょう", type: "名詞", meaning: "發表", ex: "発表する", exZh: "發表" },
+      { word: "報告", kana: "ほうこく", type: "名詞", meaning: "報告", ex: "報告する", exZh: "報告" },
+      { word: "相談", kana: "そうだん", type: "名詞", meaning: "商量", ex: "相談する", exZh: "商量" },
+      { word: "決定", kana: "けってい", type: "名詞", meaning: "決定", ex: "決定する", exZh: "決定" }
+    ],
+    phrases: [
+      { ja: "〜の際に", meaning: "在⋯時", ex: "出発の際に", exZh: "在出發時" },
+      { ja: "〜に際して", meaning: "在⋯時", ex: "卒業に際して", exZh: "在畢業時" },
+      { ja: "〜をめぐって", meaning: "圍繞⋯", ex: "問題をめぐって", exZh: "圍繞問題" }
+    ],
+    grammarTest: [
+      { q: "出発(  )確認する", opts: ["の際に", "に際して", "をめぐって"], correct: 0, explain: "「際に」表示在⋯時候" },
+      { q: "卒業(  )挨拶する", opts: ["の際に", "に際して", "をめぐって"], correct: 1, explain: "「に際して」表示在⋯時候" },
+      { q: "問題(  )議論する", opts: ["の際に", "に際して", "をめぐって"], correct: 2, explain: "「をめぐって」表示圍繞" }
+    ],
+    listening: {
+      task1: {
+        dialogue: [
+          { text: "会議で話しています", voice: "male" },
+          { text: "この問題をめぐって議論しましょう", voice: "male" },
+          { text: "はい分かりました", voice: "female" }
+        ],
+        question: "何をしますか",
+        options: ["問題をめぐって議論する", "問題を解決する", "問題を無視する", "問題を延期する"],
+        correct: 0,
+        explain: "「問題をめぐって議論する」"
+      },
+      task2: {
+        audio: "出発の際に確認してください",
+        text: "出発____確認してください",
+        answer: "の際に",
+        explain: "完整句是「出発の際に確認してください」"
+      }
+    },
+    reading: {
+      passage: "出発の際に必ず確認してください。卒業に際して感謝の言葉を述べました。この問題をめぐって長時間議論しました。",
+      questions: [
+        { q: "いつ確認しますか", opts: ["到着の際", "出発の際", "会議の際", "食事の際"], correct: 1, explain: "「出発の際に確認する」" },
+        { q: "何をめぐって議論しましたか", opts: ["計画", "予定", "問題", "結果"], correct: 2, explain: "「問題をめぐって議論した」" }
       ]
     }
   }
@@ -438,20 +1102,31 @@ async function speakDialogue(parts) {
   }
 }
 
-// 導航
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.onclick = () => {
-    const section = item.getAttribute('data-section');
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    item.classList.add('active');
-  };
-});
+// 隨機單字練習
+function startRandomPractice() {
+  const d = curriculum[currentDay];
+  const randomIdx = Math.floor(Math.random() * d.vocabulary.length);
+  currentRandomWord = d.vocabulary[randomIdx];
+  currentRandomIndex = randomIdx;
+  
+  document.getElementById('random-word-display').textContent = currentRandomWord.word;
+  document.getElementById('random-practice-input').value = '';
+  document.getElementById('practice-feedback').innerHTML = '';
+  document.getElementById('random-practice-input').focus();
+}
 
-document.getElementById('daySelector').onchange = (e) => {
-  currentDay = parseInt(e.target.value);
-  renderContent();
-};
+function checkRandomPractice() {
+  if (!currentRandomWord) return;
+  
+  const input = document.getElementById('random-practice-input').value.trim();
+  const feedback = document.getElementById('practice-feedback');
+  
+  if (input === currentRandomWord.kana) {
+    feedback.innerHTML = `<div style="color: #90ee90;">✓ 正確! ${currentRandomWord.meaning}</div>`;
+  } else {
+    feedback.innerHTML = `<div style="color: #ff6666;">✗ 正確答案: ${currentRandomWord.kana} (${currentRandomWord.meaning})</div>`;
+  }
+}
 
 function toggleAllKana() {
   allKanaHidden = !allKanaHidden;
@@ -466,6 +1141,21 @@ function toggleKana(i) {
   document.getElementById(`kana-${i}`).classList.toggle('hidden');
 }
 
+// 導航
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.onclick = () => {
+    const section = item.getAttribute('data-section');
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+  };
+});
+
+document.getElementById('daySelector').onchange = (e) => {
+  currentDay = parseInt(e.target.value);
+  renderContent();
+};
+
 function selectGrammarQ(q, opt) {
   grammarAnswers[q] = opt;
   document.querySelectorAll(`[data-gq="${q}"] .option`).forEach((el, i) => {
@@ -475,10 +1165,10 @@ function selectGrammarQ(q, opt) {
 }
 
 function submitGrammarTest() {
-  const data = curriculum[currentDay];
+  const d = curriculum[currentDay];
   let correct = 0;
   
-  data.grammarTest.forEach((test, i) => {
+  d.grammarTest.forEach((test, i) => {
     const opts = document.querySelectorAll(`[data-gq="${i}"] .option`);
     const hint = document.getElementById(`gh-${i}`);
     
@@ -496,34 +1186,9 @@ function submitGrammarTest() {
     hint.classList.add('show');
   });
   
-  const pct = Math.round((correct / 4) * 100);
-  document.getElementById('grammar-result').innerHTML = `<div class="result">答對 ${correct}/4 題 (${pct}%)</div>`;
+  const pct = Math.round((correct / 3) * 100);
+  document.getElementById('grammar-result').innerHTML = `<div class="result">答對 ${correct}/3 題 (${pct}%)</div>`;
   document.getElementById('submit-grammar').disabled = true;
-  updateAccuracy(correct, 4);
-}
-
-function submitVocabTest() {
-  const data = curriculum[currentDay];
-  let correct = 0;
-  
-  data.vocabTest.forEach((v, i) => {
-    const input = document.getElementById(`vq-${i}`);
-    const hint = document.getElementById(`vh-${i}`);
-    
-    if (input.value.trim() === v.kana) {
-      input.classList.add('correct');
-      correct++;
-    } else {
-      input.classList.add('wrong');
-      hint.classList.add('show');
-    }
-    input.disabled = true;
-  });
-  
-  const pct = Math.round((correct / 8) * 100);
-  document.getElementById('vocab-result').innerHTML = `<div class="result">答對 ${correct}/8 題 (${pct}%)</div>`;
-  document.getElementById('submit-vocab').disabled = true;
-  updateAccuracy(correct, 8);
 }
 
 function selectListening(task, opt) {
@@ -535,72 +1200,49 @@ function selectListening(task, opt) {
 }
 
 async function playTask1() {
-  const data = curriculum[currentDay].listening.task1;
-  await speakDialogue(data.dialogue);
-}
-
-async function playTask2() {
-  const data = curriculum[currentDay].listening.task2;
-  await speakDialogue(data.dialogue);
+  const d = curriculum[currentDay].listening.task1;
+  await speakDialogue(d.dialogue);
 }
 
 function submitListening() {
-  const data = curriculum[currentDay].listening;
+  const d = curriculum[currentDay].listening;
   let correct = 0;
   let total = 0;
 
   // Task 1
   const t1opts = document.querySelectorAll('[data-task="task1"] .option');
   t1opts.forEach((el, i) => {
-    if (i === data.task1.correct) el.classList.add('correct');
-    if (listeningAnswers.task1 === i && i !== data.task1.correct) el.classList.add('wrong');
+    if (i === d.task1.correct) el.classList.add('correct');
+    if (listeningAnswers.task1 === i && i !== d.task1.correct) el.classList.add('wrong');
   });
-  if (listeningAnswers.task1 === data.task1.correct) {
+  if (listeningAnswers.task1 === d.task1.correct) {
     correct++;
   } else if (listeningAnswers.task1 !== null) {
     const task = t1opts[0].closest('.task');
     const hint = document.createElement('div');
     hint.style.cssText = 'color: #e24b4a; margin-top: 1rem; padding: 0.75rem; background: #fcebeb; border-radius: 8px; font-size: 14px;';
-    hint.innerHTML = `✗ ${data.task1.explain}`;
+    hint.innerHTML = `✗ ${d.task1.explain}`;
     task.appendChild(hint);
   }
   total++;
 
   // Task 2
-  const t2opts = document.querySelectorAll('[data-task="task2"] .option');
-  t2opts.forEach((el, i) => {
-    if (i === data.task2.correct) el.classList.add('correct');
-    if (listeningAnswers.task2 === i && i !== data.task2.correct) el.classList.add('wrong');
-  });
-  if (listeningAnswers.task2 === data.task2.correct) {
-    correct++;
-  } else if (listeningAnswers.task2 !== null) {
-    const task = t2opts[0].closest('.task');
-    const hint = document.createElement('div');
-    hint.style.cssText = 'color: #e24b4a; margin-top: 1rem; padding: 0.75rem; background: #fcebeb; border-radius: 8px; font-size: 14px;';
-    hint.innerHTML = `✗ ${data.task2.explain}`;
-    task.appendChild(hint);
-  }
-  total++;
-
-  // Task 3
-  const t3 = document.getElementById('task3-input');
-  const t3h = document.getElementById('task3-hint');
-  if (t3.value.trim() === data.task3.answer) {
-    t3.classList.add('correct');
-    t3h.innerHTML = '<div style="color: #639922;">✓ 正確!</div>';
+  const t2 = document.getElementById('task2-input');
+  const t2h = document.getElementById('task2-hint');
+  if (t2.value.trim() === d.task2.answer) {
+    t2.classList.add('correct');
+    t2h.innerHTML = '<div style="color: #639922;">✓ 正確!</div>';
     correct++;
   } else {
-    t3.classList.add('wrong');
-    t3h.innerHTML = `<div style="color: #e24b4a;">✗ ${data.task3.explain}<br>正確答案: ${data.task3.answer}</div>`;
+    t2.classList.add('wrong');
+    t2h.innerHTML = `<div style="color: #e24b4a;">✗ ${d.task2.explain}<br>正確答案: ${d.task2.answer}</div>`;
   }
-  t3h.classList.add('show');
+  t2h.classList.add('show');
   total++;
 
   const pct = Math.round((correct / total) * 100);
   document.getElementById('listening-result').innerHTML = `<div class="result">答對 ${correct}/${total} 題 (${pct}%)</div>`;
   document.getElementById('submit-listening').disabled = true;
-  updateAccuracy(correct, total);
 }
 
 function selectReading(q, opt) {
@@ -612,10 +1254,10 @@ function selectReading(q, opt) {
 }
 
 function submitReading() {
-  const data = curriculum[currentDay].reading;
+  const d = curriculum[currentDay].reading;
   let correct = 0;
   
-  data.questions.forEach((q, i) => {
+  d.questions.forEach((q, i) => {
     const opts = document.querySelectorAll(`[data-rq="${i}"] .option`);
     const qbox = opts[0].closest('.question-box');
     
@@ -634,56 +1276,63 @@ function submitReading() {
     }
   });
 
-  const pct = Math.round((correct / 3) * 100);
-  document.getElementById('reading-result').innerHTML = `<div class="result">答對 ${correct}/3 題 (${pct}%)</div>`;
+  const pct = Math.round((correct / 2) * 100);
+  document.getElementById('reading-result').innerHTML = `<div class="result">答對 ${correct}/2 題 (${pct}%)</div>`;
   document.getElementById('submit-reading').disabled = true;
-  updateAccuracy(correct, 3);
-}
-
-function updateAccuracy(correct, total) {
-  const stats = JSON.parse(localStorage.getItem('n3Stats') || '{"correct": 0, "total": 0}');
-  stats.correct += correct;
-  stats.total += total;
-  localStorage.setItem('n3Stats', JSON.stringify(stats));
-  
-  const acc = Math.round((stats.correct / stats.total) * 100);
-  document.getElementById('accuracy').textContent = acc + '%';
 }
 
 function renderContent() {
   const d = curriculum[currentDay];
+  if (!d) {
+    document.getElementById('content').innerHTML = '<div class="section"><h2>此天數內容尚未完成</h2></div>';
+    return;
+  }
   
   document.getElementById('currentDay').textContent = currentDay;
-  document.getElementById('progress').textContent = Math.round((currentDay / 30) * 100) + '%';
-  document.getElementById('grammarCount').textContent = d.grammar.length;
+  document.getElementById('progress').textContent = (currentDay * 10) + '%';
   
   listeningAnswers = {};
   readingAnswers = {};
   grammarAnswers = {};
   
   let html = `
-    <h1 style="font-size: 24px; font-weight: 500; margin-bottom: 1.5rem;">${d.title}</h1>
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="
+        font-size: 36px; 
+        font-weight: 700; 
+        margin-bottom: 0.5rem; 
+        background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff4444 100%); 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+        filter: drop-shadow(0 2px 8px rgba(255, 68, 68, 0.6));
+        letter-spacing: 2px;
+      ">🔥 17の日本語学習 🔥</h1>
+      <p style="
+        font-size: 16px; 
+        color: #ff4444; 
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        margin-bottom: 0.25rem;
+      ">背不起來都下地獄</p>
+      <p style="font-size: 13px; color: #c9a962; margin-top: 0.5rem;">${d.title}</p>
+    </div>
     
     <div class="section" id="grammar">
-      <h2 class="section-title">📚 文法 (${d.grammar.length}個)</h2>
+      <h2 class="section-title">🔥 文法 (${d.grammar.length}個)</h2>
       ${d.grammar.map(g => `
         <div class="grammar-item">
-          <div class="grammar-header">
-            <div class="grammar-title">${g.pattern}</div>
-          </div>
+          <div class="grammar-title">${g.pattern}</div>
           <div class="meaning">${g.meaning}</div>
-          <div style="font-size: 13px; color: #666; margin-bottom: 0.75rem;">接續: ${g.usage}</div>
-          ${g.note ? `<div class="note">💡 ${g.note}</div>` : ''}
           ${g.examples.map(ex => `
             <div class="example">
-              <div style="display: flex; justify-content: space-between; gap: 1rem;">
-                <div style="flex: 1;">
-                  <div class="example-ja">${ex.ja}</div>
-                  <div class="example-kana">${ex.kana}</div>
-                  <div class="example-zh">${ex.zh}</div>
-                </div>
-                <button class="play-btn" onclick="speak('${ex.ja}')" style="align-self: flex-start;">▶</button>
+              <div class="example-content">
+                <div class="example-ja">${ex.ja}</div>
+                <div class="example-kana">${ex.kana}</div>
+                <div class="example-zh">${ex.zh}</div>
               </div>
+              <button class="play-btn" onclick="speak('${ex.ja}')">▶</button>
             </div>
           `).join('')}
         </div>
@@ -692,57 +1341,61 @@ function renderContent() {
 
     <div class="section" id="vocab">
       <div class="header-row">
-        <h2 class="section-title" style="margin: 0;">📝 單字 (${d.vocabulary.length}個)</h2>
-        <button class="btn" id="toggleKanaBtn" onclick="toggleAllKana()">🙈 隱藏全部</button>
+        <h2 class="section-title" style="margin: 0;">💀 單字 (${d.vocabulary.length}個)</h2>
+        <button class="btn" id="toggleKanaBtn" onclick="toggleAllKana()">🙈 隱藏</button>
       </div>
-      <div class="practice-box">
-        <div style="font-size: 13px; color: #666; margin-bottom: 0.5rem;">💡 在這裡練習打字,對照下面的單字檢查</div>
-        <textarea class="practice-input" placeholder="例: よてい じしん じょうほう..."></textarea>
+      
+      <div class="random-practice">
+        <div style="font-size: 14px; color: #c9a962; margin-bottom: 1rem; text-align: center;">💀 隨機單字練習</div>
+        <div class="random-word-display" id="random-word-display">點擊「開始」抽單字</div>
+        <input type="text" class="practice-input-large" id="random-practice-input" placeholder="輸入平假名" />
+        <div class="practice-feedback" id="practice-feedback"></div>
+        <div class="practice-buttons">
+          <button class="btn" onclick="startRandomPractice()">🎲 開始/下一個</button>
+          <button class="btn" onclick="checkRandomPractice()">✓ 檢查</button>
+        </div>
       </div>
+      
       <div class="vocab-grid">
         ${d.vocabulary.map((v, i) => `
           <div class="vocab-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-              <div style="flex: 1;">
-                <div class="vocab-word">${v.word}</div>
-                <div class="vocab-kana" id="kana-${i}" onclick="toggleKana(${i})">${v.kana}</div>
-                <div class="vocab-type">${v.type}</div>
-              </div>
-              <button class="play-btn" onclick="speak('${v.word}')">▶</button>
+            <div class="vocab-content">
+              <div class="vocab-word">${v.word}</div>
+              <div class="vocab-kana" id="kana-${i}" onclick="toggleKana(${i})">${v.kana}</div>
+              <div class="vocab-type">${v.type}</div>
+              <div class="vocab-meaning">${v.meaning}</div>
+              <div class="vocab-ex">${v.ex}</div>
+              <div class="vocab-ex-zh">${v.exZh}</div>
             </div>
-            <div class="vocab-meaning">${v.meaning}</div>
-            <div class="vocab-ex">${v.ex}</div>
-            <div class="vocab-ex-zh">${v.exZh}</div>
+            <button class="play-btn" onclick="speak('${v.word}')">▶</button>
           </div>
         `).join('')}
       </div>
     </div>
 
     <div class="section" id="phrases">
-      <h2 class="section-title">💬 片語 (${d.phrases.length}個)</h2>
+      <h2 class="section-title">🩸 片語 (${d.phrases.length}個)</h2>
       ${d.phrases.map(p => `
         <div class="phrase-item">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-            <div style="flex: 1;">
-              <div class="phrase-ja">${p.ja}</div>
-              <div class="phrase-meaning">${p.meaning}</div>
-            </div>
-            <button class="play-btn" onclick="speak('${p.ja}')">▶</button>
+          <div class="phrase-content">
+            <div class="phrase-ja">${p.ja}</div>
+            <div class="phrase-meaning">${p.meaning}</div>
+            <div class="phrase-ex">${p.ex}</div>
+            <div class="phrase-ex-zh">${p.exZh}</div>
           </div>
-          <div class="phrase-ex">${p.ex}</div>
-          <div class="phrase-ex-zh">${p.exZh}</div>
+          <button class="play-btn" onclick="speak('${p.ja}')">▶</button>
         </div>
       `).join('')}
     </div>
 
     <div style="height: 60px; display: flex; align-items: center; margin: 3rem 0 2rem;">
-      <div style="flex: 1; height: 2px; background: linear-gradient(to right, transparent, #ddd, transparent);"></div>
-      <div style="padding: 0 2rem; font-size: 16px; font-weight: 600; color: #666;">📝 測驗區</div>
-      <div style="flex: 1; height: 2px; background: linear-gradient(to right, transparent, #ddd, transparent);"></div>
+      <div style="flex: 1; height: 2px; background: linear-gradient(to right, transparent, #8b0000, transparent);"></div>
+      <div style="padding: 0 2rem; font-size: 16px; font-weight: 600; color: #ff4444;">⚔️ 試煉區</div>
+      <div style="flex: 1; height: 2px; background: linear-gradient(to right, transparent, #8b0000, transparent);"></div>
     </div>
 
     <div class="section" id="grammar-test">
-      <h2 class="section-title">✅ 文法測驗 (4題)</h2>
+      <h2 class="section-title">⚔️ 文法測驗 (3題)</h2>
       ${d.grammarTest.map((t, i) => `
         <div class="question-box">
           <div class="question-text">${i + 1}. ${t.q}</div>
@@ -758,26 +1411,12 @@ function renderContent() {
       <div id="grammar-result"></div>
     </div>
 
-    <div class="section" id="vocab-test">
-      <h2 class="section-title">✅ 單字測驗 (8題)</h2>
-      <p style="font-size: 14px; color: #666; margin-bottom: 1.5rem;">請用平假名填寫讀音</p>
-      ${d.vocabTest.map((v, i) => `
-        <div class="question-box">
-          <div class="question-text">${i + 1}. ${v.word} 的讀音是?</div>
-          <input type="text" class="fill-input" id="vq-${i}" placeholder="請用平假名填寫" data-answer="${v.kana}" />
-          <div class="answer-hint" id="vh-${i}">正確答案: ${v.kana} (${v.hint})</div>
-        </div>
-      `).join('')}
-      <button class="submit-btn" id="submit-vocab" onclick="submitVocabTest()">提交答案</button>
-      <div id="vocab-result"></div>
-    </div>
-
     <div class="section" id="listening">
-      <h2 class="section-title">🎧 聽力測驗 (N3格式)</h2>
+      <h2 class="section-title">👂 聽力測驗</h2>
       
       <div class="task" data-task="task1">
         <div class="task-type">課題理解</div>
-        <div class="task-instruction">聽對話和問題,選出最適合的答案。</div>
+        <div class="task-instruction">聽對話和問題,選出最適合的答案</div>
         <div class="audio-controls">
           <button class="play-btn" onclick="playTask1()">▶ 播放對話</button>
           <button class="play-btn" onclick="speak('${d.listening.task1.question}')">▶ 播放問題</button>
@@ -792,32 +1431,16 @@ function renderContent() {
         </div>
       </div>
 
-      <div class="task" data-task="task2">
-        <div class="task-type">重點理解</div>
-        <div class="task-instruction">聽對話,回答問題。</div>
-        <div class="audio-controls">
-          <button class="play-btn" onclick="playTask2()">▶ 播放對話</button>
-        </div>
-        <div class="question-box">
-          <div class="question-text">${d.listening.task2.question}</div>
-          <div class="options">
-            ${d.listening.task2.options.map((opt, i) => `
-              <div class="option" onclick="selectListening('task2', ${i})">${i + 1}. ${opt}</div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-
       <div class="task">
         <div class="task-type">填空練習</div>
-        <div class="task-instruction">聽音檔,填入缺少的單字。</div>
+        <div class="task-instruction">聽音檔,填入缺少的單字</div>
         <div class="audio-controls">
-          <button class="play-btn" onclick="speak('${d.listening.task3.audio}')">▶ 播放音檔</button>
+          <button class="play-btn" onclick="speak('${d.listening.task2.audio}')">▶ 播放音檔</button>
         </div>
         <div class="question-box">
-          <div class="question-text">${d.listening.task3.text}</div>
-          <input type="text" class="fill-input" id="task3-input" placeholder="填入缺少的單字" />
-          <div class="answer-hint" id="task3-hint"></div>
+          <div class="question-text">${d.listening.task2.text}</div>
+          <input type="text" class="fill-input" id="task2-input" placeholder="填入缺少的單字" />
+          <div class="answer-hint" id="task2-hint"></div>
         </div>
       </div>
 
@@ -826,7 +1449,7 @@ function renderContent() {
     </div>
 
     <div class="section" id="reading">
-      <h2 class="section-title">📖 閱讀理解 (N3格式)</h2>
+      <h2 class="section-title">📜 閱讀理解</h2>
       <div class="passage">${d.reading.passage}</div>
       ${d.reading.questions.map((q, i) => `
         <div class="question-box" data-rq="${i}">
